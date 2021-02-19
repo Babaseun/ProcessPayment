@@ -1,0 +1,29 @@
+﻿using ProcessPayment.Domain.Entities;
+using ProcessPayment.Domain.IRepository;
+using ProcessPayment.Domain.IServices;
+using System;
+using System.Threading.Tasks;
+
+namespace ProcessPayment.Domain.Services
+{
+    public class CheapPaymentService : ICheapPaymentGateway
+    {
+        private readonly IPaymentRepository _paymentRepository;
+
+        public CheapPaymentService(IPaymentRepository paymentRepository)
+        {
+            _paymentRepository = paymentRepository;
+        }
+        public async Task<Response<Payment>> ProcessPayment(Payment payment)
+        {
+            var response = new Response<Payment>();
+
+            await _paymentRepository.Save(payment);
+
+            response.Success = true;
+            response.Data = payment;
+            
+            return response;
+        }
+    }
+}
