@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ProcessPayment.Domain.Services
 {
-    public class PaymentService
+    public class PaymentService : IPaymentService
     {
         private readonly ICheapPaymentGateway _cheapPaymentGateway;
         private readonly IExpensivePaymentGateway _expensivePaymentGateway;

@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessPayment.API", "ProcessPayment.API\ProcessPayment.API.csproj", "{DF7A2075-49D7-4E3D-9495-960AD9F3726B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessPayment.Domain", "ProcessPayment.Domain\ProcessPayment.Domain.csproj", "{0F86907B-5C17-4788-884F-7E6FA0776A45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessPayment.Domain", "ProcessPayment.Domain\ProcessPayment.Domain.csproj", "{0F86907B-5C17-4788-884F-7E6FA0776A45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessPayment.Data", "ProcessPayment.Data\ProcessPayment.Data.csproj", "{1E16CC1B-59BE-45C8-8069-E497FB9C9684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessPayment.Data", "ProcessPayment.Data\ProcessPayment.Data.csproj", "{1E16CC1B-59BE-45C8-8069-E497FB9C9684}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentProcess.Test", "PaymentProcess.Test\PaymentProcess.Test.csproj", "{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{1E16CC1B-59BE-45C8-8069-E497FB9C9684}.Release|x64.Build.0 = Release|Any CPU
 		{1E16CC1B-59BE-45C8-8069-E497FB9C9684}.Release|x86.ActiveCfg = Release|Any CPU
 		{1E16CC1B-59BE-45C8-8069-E497FB9C9684}.Release|x86.Build.0 = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|x64.Build.0 = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Debug|x86.Build.0 = Debug|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|x64.ActiveCfg = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|x64.Build.0 = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|x86.ActiveCfg = Release|Any CPU
+		{BEE3CA39-7BD0-4F8B-940F-FB753D5F8173}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

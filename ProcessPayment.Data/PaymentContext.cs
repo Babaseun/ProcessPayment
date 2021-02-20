@@ -23,7 +23,6 @@ namespace ProcessPayment.Data
             payment.Property(a => a.CreditCardNumber)
                    .IsRequired();
 
-
         }
     }
 }
