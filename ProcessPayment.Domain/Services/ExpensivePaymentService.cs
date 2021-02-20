@@ -1,7 +1,6 @@
 ﻿using ProcessPayment.Domain.Entities;
 using ProcessPayment.Domain.IRepository;
 using ProcessPayment.Domain.IServices;
-using System;
 using System.Threading.Tasks;
 
 namespace ProcessPayment.Domain.Services
@@ -19,12 +18,14 @@ namespace ProcessPayment.Domain.Services
             var response = new Response<Payment>();
 
             await _paymentRepository.Save(payment);
-
-           
-
-            response.Success = true;
             response.Data = payment;
             return response;
+        }
+
+        public async Task<Payment> UpdatePayment(string id)
+        {
+            var payment = await _paymentRepository.UpdatePayment(id);
+            return payment;
         }
     }
 }

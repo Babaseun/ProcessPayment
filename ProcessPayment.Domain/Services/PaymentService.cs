@@ -22,42 +22,65 @@ namespace ProcessPayment.Domain.Services
         public async Task<Response<Payment>> ProcessPayment(Payment payment)
         {
             var response = new Response<Payment>();
-            if (payment.Amount < 20)
+            switch (payment.Amount)
             {
-                response = await _cheapPaymentGateway.ProcessPayment(payment);
-
-                return response;
-            }
-
-            if (payment.Amount < 21 && payment.Amount > 500)
-            {
-                if (_expensivePaymentGateway != null)
-                {
-                    response = await _expensivePaymentGateway.ProcessPayment(payment);
-                    return response;
-                }
-                response = await _cheapPaymentGateway.ProcessPayment(payment);
-                return response;
-            }
-
-            if (payment.Amount > 500)
-            {
-                const int numberOfTimes = 3;
-                var i = 0;
-                while (i++ < numberOfTimes)
-                {
-                    response = await _premiumPaymentGateway.ProcessPayment(payment);
-
-                    if (response.State == "Processed")
+                case < 20:
                     {
-                        return response;
+                        await _cheapPaymentGateway.ProcessPayment(payment);
+                        var paymentData = await _cheapPaymentGateway.UpdatePayment(payment.PaymentId);
+                        response.Data = paymentData;
+                        response.State = paymentData.PaymentState.State;
+                        if (response.State == "processed")
+                        {
+                            return response;
+                        }
+                        break;
                     }
+                case >= 21 and <= 500:
+                    {
+                        if (_expensivePaymentGateway != null)
+                        {
+                            await _expensivePaymentGateway.ProcessPayment(payment);
+                            var paymentData = await _expensivePaymentGateway.UpdatePayment(payment.PaymentId);
+                            response.Data = paymentData;
+                            response.State = paymentData.PaymentState.State;
+                            if (response.State == "processed")
+                            {
+                                return response;
+                            }
+                        }
+                        await _cheapPaymentGateway.ProcessPayment(payment);
+                        var result = await _cheapPaymentGateway.UpdatePayment(payment.PaymentId);
+                        response.Data = result;
+                        response.State = result.PaymentState.State;
+                        if (response.State == "processed")
+                        {
+                            return response;
+                        }
 
-                }
+                        break;
+                    }
+                case > 500:
+                    {
+                        const int numberOfTimes = 3;
+                        var i = 0;
+                        while (i++ < numberOfTimes)
+                        {
+                            await _premiumPaymentGateway.ProcessPayment(payment);
+                            var paymentData = await _premiumPaymentGateway.UpdatePayment(payment.PaymentId);
+                            response.Data = paymentData;
+                            response.State = paymentData.PaymentState.State;
+                            if (response.State == "processed")
+                            {
+                                return response;
+                            }
+                        }
+
+                        break;
+                    }
             }
-
+            response.State = "failed";
             return response;
-
         }
     }
 }

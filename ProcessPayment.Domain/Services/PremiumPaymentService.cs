@@ -8,7 +8,6 @@ namespace ProcessPayment.Domain.Services
     public class PremiumPaymentService : IPremiumPaymentGateway
     {
         private readonly IPaymentRepository _paymentRepository;
-        //private readonly IPaymentStateRepo _paymentState;
 
         public PremiumPaymentService(IPaymentRepository paymentRepository)
         {
@@ -20,9 +19,14 @@ namespace ProcessPayment.Domain.Services
 
             await _paymentRepository.Save(payment);
 
-            response.Success = true;
             response.Data = payment;
             return response;
+        }
+
+        public async Task<Payment> UpdatePayment(string id)
+        {
+            var payment = await _paymentRepository.UpdatePayment(id);
+            return payment;
         }
     }
 }

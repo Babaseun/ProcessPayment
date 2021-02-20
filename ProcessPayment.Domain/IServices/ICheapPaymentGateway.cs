@@ -1,10 +1,7 @@
-﻿using ProcessPayment.Domain.Entities;
-using System.Threading.Tasks;
-
-namespace ProcessPayment.Domain.IServices
+﻿namespace ProcessPayment.Domain.IServices
 {
-    public interface ICheapPaymentGateway
+    public interface ICheapPaymentGateway : IService
     {
-        Task<Response<Payment>> ProcessPayment(Payment payment);
+
     }
 }

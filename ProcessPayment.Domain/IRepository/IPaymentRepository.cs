@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace ProcessPayment.Domain.IRepository
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IRepository<Payment>
     {
-        Task Save(Payment payment);
+        Task<Payment> UpdatePayment(string id);
     }
 }

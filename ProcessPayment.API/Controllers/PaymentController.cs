@@ -24,14 +24,12 @@ namespace ProcessPayment.API.Controllers
             _expensivePaymentGateway = expensivePaymentGateway;
             _premiumPaymentGateway = premiumPaymentGateway;
         }
-
         [HttpPost]
         public async Task<IActionResult> ProcessPayment([FromBody] PaymentRequestDto model)
         {
             try
             {
-                var service = new PaymentService(_cheapPaymentGateway, _expensivePaymentGateway,
-                    _premiumPaymentGateway);
+                var service = new PaymentService(_cheapPaymentGateway, _expensivePaymentGateway, _premiumPaymentGateway);
 
                 var payment = new Payment
                 {
@@ -50,10 +48,9 @@ namespace ProcessPayment.API.Controllers
                     }
 
                 };
-
                 var response = await service.ProcessPayment(payment);
 
-                if (!response.Success)
+                if (response.State != "processed")
                 {
                     return BadRequest(response);
                 }
@@ -66,7 +63,6 @@ namespace ProcessPayment.API.Controllers
                 return StatusCode(500, e.Message);
 
             }
-
         }
     }
 }
